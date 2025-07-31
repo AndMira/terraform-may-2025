@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     aws = {
@@ -10,5 +9,10 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = var.region
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = var.key_name
+  public_key = file("~/.ssh/id_rsa.pub")
 }
